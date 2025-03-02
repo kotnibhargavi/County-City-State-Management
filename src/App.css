@@ -1,38 +1,399 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+:root {
+  --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --success-gradient: linear-gradient(to right, #00b09b, #96c93d);
+  --warning-gradient: linear-gradient(to right, #f7b733, #fc4a1a);
+  --danger-gradient: linear-gradient(to right, #ff416c, #ff4b2b);
+  --light-gradient: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+  --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.05);
+  --btn-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  --transition-speed: 0.3s;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   min-height: 100vh;
+  padding: 20px;
+  color: #333;
+  line-height: 1.6;
+}
+
+.app-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.app-header {
+  background: var(--primary-gradient);
+  color: white;
+  padding: 25px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.app-header::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+  transform: rotate(10deg);
+  z-index: 0;
+}
+
+.app-header h1 {
+  position: relative;
+  z-index: 1;
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin: 0;
+}
+
+.app-content {
+  padding: 25px;
+}
+
+/* Country List Styles */
+.country-list, .state-list, .city-list {
+  margin-bottom: 30px;
+}
+
+.country-header, .state-header {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  margin-bottom: 20px;
+}
+
+.country-header h2, .state-header h3 {
+  font-weight: 700;
+  color: #333;
+  position: relative;
+  padding-bottom: 8px;
+}
+
+.country-header h2::after {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 3px;
+  background: var(--primary-gradient);
+  bottom: 0;
+  left: 0;
+  border-radius: 10px;
+}
+
+.empty-message {
+  color: #888;
+  font-style: italic;
+  padding: 20px;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  margin: 15px 0;
+  border: 1px dashed #ddd;
+  transition: all 0.3s ease;
+}
+
+.empty-message:hover {
+  background-color: #f1f1f1;
+  border-color: #ccc;
+}
+
+.country-item, .state-item {
+  background-color: #fff;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eaeaea;
+}
+
+.country-item:hover, .state-item:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.country-main, .state-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  cursor: pointer;
+  background: var(--light-gradient);
+  transition: background-color 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.country-main:hover, .state-main:hover {
+  background: linear-gradient(120deg, #f0f2f5 0%, #e6e9ec 100%);
+}
+
+.country-main::after, .state-main::after {
+  content: '';
+  position: absolute;
+  width: 5px;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: var(--primary-gradient);
+  transition: all 0.3s;
+}
+
+.country-main:hover::after, .state-main:hover::after {
+  width: 7px;
+}
+
+.title-section {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.expand-icon {
+  margin-right: 12px;
+  font-size: 14px;
+  color: #6a11cb;
+  transition: transform 0.3s ease;
+}
+
+.title-section:hover .expand-icon {
+  transform: translateX(3px);
+}
+
+.count-badge {
+  font-size: 12px;
+  background: var(--primary-gradient);
+  color: white;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-left: 12px;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  animation: pulseAnimation 2s infinite;
+}
+
+@keyframes pulseAnimation {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+/* State and City Containers */
+.states-container, .cities-container {
+  padding: 20px;
+  background-color: #fff;
+  border-top: 1px solid #eee;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; max-height: 0; }
+  to { opacity: 1; max-height: 2000px; }
+}
+
+/* City Item Styles */
+.city-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border-left: 3px solid #6a11cb;
+  transition: all 0.3s ease;
+}
+
+.city-item:hover {
+  background-color: #f1f3f5;
+  transform: translateX(3px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.city-name {
+  font-weight: 500;
+  color: #444;
+}
+
+/* Button Styles */
+button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: var(--btn-shadow);
+  position: relative;
+  overflow: hidden;
+  color: white;
+  z-index: 1;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 0.3s;
+  z-index: -1;
+}
+
+button:hover::before {
+  width: 100%;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(50, 50, 93, 0.15), 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(50, 50, 93, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.add-btn {
+  background: var(--success-gradient);
+  padding: 10px 20px;
+  position: relative;
+  letter-spacing: 0.5px;
+}
+
+.add-btn::after {
+  content: '+';
+  position: absolute;
+  opacity: 0;
+  right: 15px;
+  transition: all 0.3s;
+}
+
+.add-btn:hover {
+  padding-right: 35px;
+}
+
+.add-btn:hover::after {
+  opacity: 1;
+  right: 15px;
+}
+
+.edit-btn {
+  background: var(--warning-gradient);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.delete-btn {
+  background: var(--danger-gradient);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.add-state-btn, .add-city-btn {
+  background: var(--secondary-gradient);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .app-container {
+    margin: 10px;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .country-main, .state-main {
+    flex-direction: column;
+    align-items: flex-start;
   }
+  
+  .action-buttons {
+    margin-top: 10px;
+    width: 100%;
+    justify-content: flex-end;
+  }
+  
+  button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}
+
+/* Loading Animation (for future use) */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+.loading::after {
+  content: '';
+  width: 30px;
+  height: 30px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #6a11cb;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Tooltips (for future enhancement) */
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]:hover::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 10px;
+  background: #333;
+  color: white;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 10;
+  opacity: 0;
+  animation: fadeInTooltip 0.3s ease forwards;
+}
+
+@keyframes fadeInTooltip {
+  to { opacity: 1; }
 }
