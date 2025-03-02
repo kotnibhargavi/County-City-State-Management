@@ -1,8 +1,7 @@
 # Country, State, and City Management System
 
-## 🌐 Live Demo
-
-[View Live Demo](([https://countrystatecitymanagement.netlify.app/])) 
+🌐 Live Demo
+View Live Demo ([(https://countrystatecitymanagement.netlify.app/)](https://countrystatecitymanagement.netlify.app/))
 
 ## 📋 Overview
 
