@@ -2,7 +2,7 @@
 
 ## 🌐 Live Demo
 
-[View Live Demo]((https://countrystatecitymanagement.netlify.app/)) 
+[View Live Demo](([https://countrystatecitymanagement.netlify.app/])) 
 
 ## 📋 Overview
 
