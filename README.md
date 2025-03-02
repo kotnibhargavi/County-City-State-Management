@@ -1,10 +1,8 @@
 # Country, State, and City Management System
 
-![Application Banner](https://api.placeholder.com/800/400?text=Country+State+City+Management)
-
 ## 🌐 Live Demo
 
-[View Live Demo](https://your-netlify-link-here.netlify.app) 
+[View Live Demo]([https://your-netlify-link-here.netlify.app](https://countrystatecitymanagement.netlify.app/)) 
 
 ## 📋 Overview
 
@@ -28,13 +26,6 @@ A React-based hierarchical data management system that allows users to organize 
   - Intuitive navigation
   - Visual hierarchy with clear relationships
 
-## 🖼️ Screenshots
-
-![Countries List View](https://api.placeholder.com/600/300?text=Countries+View)
-![States Expanded View](https://api.placeholder.com/600/300?text=States+View)
-![Cities Management](https://api.placeholder.com/600/300?text=Cities+View)
-
-<!-- Replace the placeholder images with actual screenshots of your application once deployed -->
 
 ## 🛠️ Technologies Used
 
